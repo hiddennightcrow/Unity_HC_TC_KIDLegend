@@ -7,6 +7,7 @@ public class player : MonoBehaviour
     public Rigidbody rig;
     private Animator ani;
     private Transform target;
+    private levelmanager LevelManager;
 
     public float speed = 10;
     private void Start()
@@ -15,10 +16,21 @@ public class player : MonoBehaviour
         ani = GetComponent<Animator>();
         joystick =GameObject.Find("虛擬搖桿").GetComponent<Joystick>();
         target = GameObject.Find("目標").transform;
+
+        LevelManager = FindObjectOfType<levelmanager>();
     }
     private void FixedUpdate()
     {
         Move();
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "傳送區域")
+        {
+            //LevelManager.Nextlevel();
+            LevelManager.StartCoroutine("Nextlevel");
+        }
     }
     private void Move()
     {
