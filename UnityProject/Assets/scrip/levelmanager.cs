@@ -1,5 +1,6 @@
 ﻿using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class levelmanager : MonoBehaviour
@@ -36,12 +37,18 @@ public class levelmanager : MonoBehaviour
         door.SetTrigger("開門觸發");
     }
 
-    public IEnumerable Nextlevel()
+    public IEnumerator Nextlevel()
     {
-        print("仔入下一關");
+        SceneManager.LoadScene("場景名稱");
+        SceneManager.LoadSceneAsync("關卡2");
 
-        imgCross.color += new Color(1, 1, 1, 0.01f);
-        yield return new WaitForSeconds(0.01f);
+        for (int i = 0; i < 100; i++)
+        {
+            imgCross.color += new Color(1, 1, 1, 0.01f);
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        
     }
 
 }
